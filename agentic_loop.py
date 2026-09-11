@@ -269,11 +269,12 @@ def load_prompt(filename):
 def get_implementation_agent_advice(observe_message):
     # TODO: Load "implementation_task_prompt.txt" and replace the
     #       "{{VALIDATION_EVIDENCE}}" placeholder with observe_message.
+    implementation_task_prompt = load_prompt("implementation_task_prompt.txt").replace("{{VALIDATION_EVIDENCE}}", observe_message)
 
     # TODO: Call call_model() using IMPLEMENTATION_MODEL, the loaded
     #       "implementation_system_prompt.txt", the task prompt, and
     #       max_tokens=120. Return its result.
-    pass
+    return call_model(IMPLEMENTATION_MODEL, load_prompt("implementation_system_prompt.txt"), implementation_task_prompt, max_tokens=120)
 
 
 def get_review_agent_advice(implementation_message, observe_message):
@@ -284,7 +285,9 @@ def get_review_agent_advice(implementation_message, observe_message):
     # TODO: Call call_model() using REVIEW_MODEL, the loaded
     #       "review_system_prompt.txt", the task prompt, and
     #       max_tokens=150. Return its result.
-    pass
+    
+    review_task_prompt = load_prompt("review_task_prompt.txt").replace("{{IMPLEMENTATION_RECOMMENDATION}}", implementation_message).replace("{{VALIDATION_EVIDENCE}}", observe_message)
+    return call_model(REVIEW_MODEL, load_prompt("review_system_prompt.txt"), review_task_prompt, max_tokens=150)
 
 
 # =============================== Human Review & Adapt ================================
@@ -330,6 +333,20 @@ def adapt(decision):
 # ================================= Main / Loop Entry ================================
 def main():
     print("=" * 60)
+    print("ASD AGENTIC REVIEW LOOP")
+    print("=" * 60)
+    print("4 - DevOps pipeline review")
+    print("0 - Exit")
+    mode = input("Choose a review target: ").strip()
+    if mode == "0":
+        return
+    if mode == "4":
+        from agentic_loop.main import main as run_devops_review
+
+        run_devops_review()
+        return
+
+    print("=" * 60)
     print("ASD LAB 02 AGENTIC LOOP")
     print("=" * 60)
 
@@ -351,9 +368,13 @@ def main():
 
     print()
     print("OBSERVE: Subject Search Check")
-    ok_subject, msg_subject = observe_subject_search(
-        sample_subject_code
-    )
+    subject_codes_to_check = ["ASD101", "WEB201", "DBS101", "NET201", "SEC301"]
+    subject_results = []
+    for code in subject_codes_to_check:
+        ok, msg = observe_subject_search(code)
+        subject_results.append(msg)
+
+    msg_subject = "; ".join(subject_results)    
     print(msg_subject)
 
     print()

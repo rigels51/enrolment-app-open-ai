@@ -15,7 +15,9 @@ Validation Evidence:
 
 Task:
 Before reviewing the recommendation, use the validation evidence provided. Review only the implementation-agent recommendation and identify evidence-backed risks or corrections. If no evidence-backed risk exists, say so.
-Only raise risks tied to the subject-code search feature described in the Implementation Recommendation; ignore evidence about unrelated endpoints.
+Before stating a risk, verify it is not already contradicted by the 
+Validation Evidence provided. Do not flag an issue that the evidence 
+shows has already passed.
 
 Format:
 Risk: <one short sentence>
