@@ -21,8 +21,11 @@ def main() -> None:
 		choice = input("Choose a review target: ").strip()
 		if choice == "0":
 			return
-		if choice != "4":
-			print("Invalid choice. Select 0 or 4.")
-			continue
-		result = run_mode(modes["devops"], app_dir, app_dir, prompts, ai)
-		print_result("DevOps", result)
+		if choice == "4":
+			result = run_mode(modes["devops"], app_dir, app_dir, prompts, ai)
+			print_result("DevOps", result)
+		elif choice == "5":
+			result = run_mode(modes["mcp"], app_dir, app_dir, prompts, ai)
+			print_result("MCP", result)
+		else:
+			print("Invalid choice. Select 0, 4, or 5.")
