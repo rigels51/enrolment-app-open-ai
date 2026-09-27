@@ -27,5 +27,8 @@ def main() -> None:
 		elif choice == "5":
 			result = run_mode(modes["mcp"], app_dir, app_dir, prompts, ai)
 			print_result("MCP", result)
+		elif choice == "6":
+			result = run_mode(modes["rag"], app_dir, app_dir, prompts, ai)
+			print_result("RAG", result)
 		else:
-			print("Invalid choice. Select 0, 4, or 5.")
+			print("Invalid choice. Select 0, 4, 5, or 6.")
