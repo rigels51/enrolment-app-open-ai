@@ -1,0 +1,14 @@
+Review multi-agent workflow coordination.
+
+Check:
+- agent sequencing (planner, then worker, then reviewer)
+- evidence grounding (worker output backed by real database evidence)
+- human approval gating before any action is final
+- audit logging (workflow_history.jsonl and coordination_audit.jsonl)
+
+Return exactly:
+Risk:
+Correction:
+Retest:
+
+Maximum 40 words.

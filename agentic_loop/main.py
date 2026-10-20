@@ -30,5 +30,8 @@ def main() -> None:
 		elif choice == "6":
 			result = run_mode(modes["rag"], app_dir, app_dir, prompts, ai)
 			print_result("RAG", result)
+		elif choice == "7":
+			result = run_mode(modes["multi_agent"], app_dir, app_dir, prompts, ai)
+			print_result("Multi-Agent", result)
 		else:
-			print("Invalid choice. Select 0, 4, 5, or 6.")
+			print("Invalid choice. Select 0, 4, 5, 6, or 7.")

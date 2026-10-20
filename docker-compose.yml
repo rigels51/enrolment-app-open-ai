@@ -7,8 +7,6 @@ services:
             - "8080:80"
         depends_on:
             - enrolment-service
-        networks:
-            - enrolment-network
         restart: unless-stopped
 
     enrolment-service:
@@ -25,12 +23,12 @@ services:
             MCP_ENABLED: "true"
             RAG_SERVICE_URL: http://host.docker.internal:5003
             RAG_ENABLED: "true"
+            MULTI_AGENT_SERVICE_URL: http://host.docker.internal:5004
+            MULTI_AGENT_ENABLED: "true"
         extra_hosts:
             - "host.docker.internal:host-gateway"
         depends_on:
             - database-service
-        networks:
-            - enrolment-network
         restart: unless-stopped
 
     database-service:
@@ -41,15 +39,7 @@ services:
             - "5002:5002"
         volumes:
             - database_data:/app/data
-        networks:
-            enrolment-network:
-                aliases:
-                    - database-service
         restart: unless-stopped
 
 volumes:
     database_data:
-
-networks:
-    enrolment-network:
-        driver: bridge

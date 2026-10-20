@@ -1,0 +1,16 @@
+Validate the multi-agent workflow implementation.
+
+Constraints:
+- local open-source stack only
+- Planner, Worker, and Reviewer agents coordinated by a single coordinator
+- Worker must use real database evidence only, never assumptions
+- Human approval required before any workflow is treated as final
+
+Required components:
+- planner_agent.plan_workflow
+- worker_agent.generate_output
+- reviewer_agent.review_output
+- coordinator.py wiring all three agents into one workflow
+- Multi-Agent API and enrolment-service route for UI integration
+
+Maximum 60 words.
